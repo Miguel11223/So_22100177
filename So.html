@@ -1,0 +1,326 @@
+<!-- <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulación de Memoria</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background-color: #d69655; 
+            color: #4b2f2f;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #472929; 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1, h2 {
+            text-align: left;
+            color: #e1e1e1;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            background-color: #067ef5; 
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #190505; 
+        }
+
+        input, select {
+            padding: 10px;
+            width: calc(100% - 22px);
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #001a34; 
+            color: #c5bbbb;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 5px #bfd2df; 
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3e9bd9; 
+            color: #690707;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00ff08; 
+        }
+
+        #memoryChart {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 2;
+        }
+
+        ul li {
+            background-color: #f562a6; 
+            padding: 15px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        /* Actualización de la memoria restante */
+        #remainingMemoryLabel {
+            font-weight: bold;
+            color: #e74c3c; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simulación de Memoria</h1>
+
+        <div class="input-group">
+            <label for="memorySize">Tamaño de Memoria</label>
+            <input type="number" id="memorySize" placeholder="Ingresa el tamaño de la memoria">
+            <select id="memoryUnit">
+                <option value="giga">GB</option>
+                <option value="mega">MB</option>
+                <option value="kilo">KB</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="osSize">Sistema Operativo</label>
+            <input type="number" id="osSize" placeholder="Tamaño del SO">
+            <select id="osUnit">
+                <option value="giga">GB</option>
+                <option value="mega">MB</option>
+                <option value="kilo">KB</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <button onclick="createMemory()">Crear Memoria</button>
+        </div>
+
+        <div class="input-group" id="partitionInputs"></div>
+
+        <canvas id="memoryChart" width="400" height="200"></canvas>
+
+        <div class="input-group">
+            <label for="jobName">Nombre del trabajo</label>
+    <input type="text" id="jobName" placeholder="Ingresa el nombre del trabajo">
+            <label for="jobSize">Tamaño del trabajo</label>
+            <input type="number" id="jobSize" placeholder="Tamaño del trabajo">
+            <select id="jobUnit">
+                <option value="giga">GB</option>
+                <option value="mega">MB</option>
+                <option value="kilo">KB</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <center>
+            <button onclick="addJob()">Agregar trabajo</button>
+            </center>
+          
+        </div>
+
+        <h2>Lista de espera</h2>
+        <ul id="jobQueue"></ul>
+
+
+
+        <div class="input-group">
+            <label>Memoria restante: <span id="remainingMemoryLabel">0 KB</span></label>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="so.js"></script>
+</body> 
+</html>
+ -->
+
+
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulación de Memoria</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background-color: #d69655; 
+            color: #4b2f2f;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #472929; 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1, h2 {
+            text-align: left;
+            color: #e1e1e1;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            background-color: #067ef5; 
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #190505; 
+        }
+
+        input, select {
+            padding: 10px;
+            width: calc(100% - 22px);
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #001a34; 
+            color: #c5bbbb;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 5px #bfd2df; 
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3e9bd9; 
+            color: #690707;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00ff08; 
+        }
+
+        #memoryChart {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 2;
+        }
+
+        ul li {
+            background-color: #f562a6; 
+            padding: 15px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        /* Actualización de la memoria restante */
+        #remainingMemoryLabel {
+            font-weight: bold;
+            color: #e74c3c; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simulación de Memoria</h1>
+
+        <div class="input-group">
+            <label for="memorySize">Tamaño de Memoria</label>
+            <input type="number" id="memorySize" placeholder="Ingresa el tamaño de la memoria">
+            <select id="memoryUnit">
+                <option value="giga">GB</option>
+                <option value="mega">MB</option>
+                <option value="kilo">KB</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="osSize">Sistema Operativo</label>
+            <input type="number" id="osSize" placeholder="Tamaño del SO">
+            <select id="osUnit">
+                <option value="giga">GB</option>
+                <option value="mega">MB</option>
+                <option value="kilo">KB</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <button onclick="createMemory()">Crear Memoria</button>
+        </div>
+
+        <!-- Contenedor de entradas de particiones -->
+        <div class="input-group" id="partitionInputs"></div>
+
+        <canvas id="memoryChart" width="400" height="200"></canvas>
+
+        <div class="input-group">
+            <label for="jobName">Nombre del trabajo</label>
+    <input type="text" id="jobName" placeholder="Ingresa el nombre del trabajo">
+            <label for="jobSize">Tamaño del trabajo</label>
+            <input type="number" id="jobSize" placeholder="Tamaño del trabajo">
+            <select id="jobUnit">
+                <option value="giga">GB</option>
+                <option value="mega">MB</option>
+                <option value="kilo">KB</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <center>
+            <button onclick="addJob()">Agregar trabajo</button>
+            </center>
+          
+        </div>
+
+        <h2>Lista de espera</h2>
+        <ul id="jobQueue"></ul>
+
+
+
+        <div class="input-group">
+            <label>Memoria restante: <span id="remainingMemoryLabel">0 KB</span></label>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="so.js"></script>
+</body>
+</html>
