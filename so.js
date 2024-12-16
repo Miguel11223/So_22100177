@@ -6,7 +6,6 @@ let jobs = [];
 let jobQueue = [];
 let memoryChart = null;
 
-// Función para crear la memoria y generar campos para las particiones
 function createMemory() {
     let memoryInput = parseFloat(document.getElementById('memorySize').value);
     let memoryUnit = document.getElementById('memoryUnit').value;
@@ -170,7 +169,7 @@ function assignWaitingJob(partitionIndex) {
 }
 
 function updatePartitionUnit() {
-    generateChart(); // Recalcular la gráfica tras cambios en la unidad
+    generateChart(); 
 }
 
 function updateRemainingMemoryLabel(value) {
